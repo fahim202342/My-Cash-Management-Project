@@ -1,0 +1,104 @@
+{% extends 'master/base.html' %}
+{% block title %}dashboard{% endblock title %}
+
+{% block body %}
+<br><br>
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Total Cash</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ total_cash }} TK(BDT)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Total Expenses</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ total_expense }} TK(BDT)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Current Balance</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ current_balance }} TK(BDT)</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<h2>Transaction</h2>
+
+<h3>Cash</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>Source</th>
+            <th>Datetime</th>
+            <th>Amount</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for cash in cash_data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ cash.source }}</td>
+            <td>{{ cash.datetime }}</td>
+            <td>{{ cash.amount }}</td>
+            <td>{{ cash.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No Cash Data Found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Expense</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Datetime</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for expense in expense_data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ expense.description }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.datetime }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No Expense Data Found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
